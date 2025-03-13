@@ -6,6 +6,7 @@ export default axios.create({
     withCredentials: true,
     headers: {
         "Accept": "application/json",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${sessionStorage.getItem("token")}`,
     }
 })

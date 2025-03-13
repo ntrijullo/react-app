@@ -12,8 +12,8 @@ const Dashboard = () => {
 
     useEffect(() => {
         amountService.getAll()
-            .then(initialAmounts => {
-                setAmounts(initialAmounts);
+            .then(response => {
+                setAmounts(response.amounts);
             })
             .catch(error => {
                 console.error("Error fetching amounts:", error);
@@ -26,12 +26,12 @@ const Dashboard = () => {
 
         setAmounts(prev => [...prev, newEntry]);
 
-        // try {
-        //     const returnedAmount = await amountService.create(newEntry);
-        //     setAmounts(prev => [...prev, returnedAmount]); // Asegurar persistencia en BD
-        // } catch (error) {
-        //     console.error("Error adding amount:", error);
-        // }
+        try {
+            const returnedAmount = await amountService.create(newEntry);
+            setAmounts(prev => [...prev, returnedAmount]);
+        } catch (error) {
+            console.error("Error adding amount:", error);
+        }
 
         setNewDate('');
         setNewAmount('');
